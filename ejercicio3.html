@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+        <meta name="author" content="SKYBROKERS">
+        <link rel="shortcut icon" href="assets/img/destino.png" type="image/x-icon">
+        <title>WEB GENIUS | Ejercicio 3</title>
+        <link rel="stylesheet" href="assets/css/main.css">
+        <!-- GOOGLE FONTs -->
+        <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+        <!-- FONT AWESOME -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <!-- ANIMATE CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    </head>
+    <body>
+        <main>
+            <div class="content">
+
+                <h1 class="logo">Ejercicio <span>3</span></h1>
+        
+                <div class="contact-wrapper animated bounceInUp">
+                    <div class="contact-form">
+                        <form id="liquidarServicio">
+                            <div>
+                                <label for="cedula">Nombre:</label>
+                                <input type="text" id="cedula" name="cedula" required>
+                            </div>
+                            <div>
+                                <label for="estrato">Estrato</label>
+                                <select id="estrato" name="estrato" class="form-select" required>
+                                  <option value="">Seleccione una opción</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="consumo">Consumo del Mes (cm3)</label>
+                                <input type="number" id="consumo" name="consumo" class="form-control" value="0" required>
+                            </div>                            
+                            <div class="contain-btn">
+                                <input  class="btn"  type="submit" value="Procesar">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="contact-info">
+                        <h4>Mr Braian</h4>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> Teniendo en cuenta:</li>
+                            <li><strong>Estrato:</strong> <span id="estrato-usuario"></span></li>
+                            <li><strong>Tarifa Básica:</strong> <span id="tarifa-basica"></span></li>
+                            <li><strong><i class="fas fa-envelope-open-text"></i> Consumo del mes:</strong> <span id="consumo-usuario"></span></li>
+                        </ul>
+                        <label for="titulo" class="col-form-label" id="titulo"></label>
+                        <label for="valorPagar" class="col-form-label" id="valorPagar"></label>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__row">
+                    <div class="footer__col footer__col--1">
+                    <h2 class="footer__title">WEB GENIUS</h2>
+                    <nav class="footer__nav">
+                        <ul class="footer__nav-list">
+                        <li class="footer__nav-item"><a href="#" class="footer__nav-link">Inicio</a></li>
+                        <li class="footer__nav-item"><a href="#" class="footer__nav-link">Acerca de nosotros</a></li>
+                        <li class="footer__nav-item"><a href="#" class="footer__nav-link">Ejercicios de pyton</a></li>
+                        </ul>
+                    </nav>
+                    </div>
+                    <div class="footer__col footer__col--2">
+                    <h2 class="footer__title">Regístrate</h2>
+                    <form class="footer__form">
+                        <input type="email" placeholder="Tu correo electrónico" class="footer__input">
+                        <button type="submit" class="footer__button">Suscribirme</button>
+                    </form>
+                    </div>
+                    <div class="footer__col footer__col--3">
+                        <h2 class="footer__title">Síguenos</h2>
+                        <div class="footer__social">
+                            <a href="#" class="footer__social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="footer__social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="footer__social-link"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer__copy">
+                    <p>Derechos reservados &copy; Braian Quintian y Mariana Ruales</p>
+                </div>
+            </div>
+        </footer>
+        <script src="assets/js/ejercicio1.js"></script>
+    </body>
+</html>

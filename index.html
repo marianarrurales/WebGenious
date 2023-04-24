@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+        <meta name="author" content="SKYBROKERS">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="shortcut icon" href="assets/img/destino.png" type="image/x-icon">
+        <link rel="stylesheet" href="assets/css/projects.css">
+        <link rel="stylesheet" href="assets/css/estilos.css">
+        <title>WEB GENIUS | Presentacion</title>
+        <style>
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            th, td {
+              text-align: left;
+              padding: 8px;
+              border-bottom: 1px solid #ddd;
+            }
+            
+            th {
+              background-color: #f2f2f2;
+            }
+        </style>
+        <script>
+            function actualizar_saldo(saldo_inicial, movimientos) {
+                var saldo = saldo_inicial;
+                for (var i = 0; i < movimientos.length; i++) {
+                    var fecha = movimientos[i][0];
+                    var tipo = movimientos[i][1];
+                    var valor = movimientos[i][2];
+                    if (tipo === 'D') {
+                    saldo += valor;
+                    } else if (tipo === 'H') {
+                    saldo -= valor;
+                    }
+                }
+                return saldo;
+            }
+
+            function mostrar_cuentas(cuentas) {
+                var total_debito = 0;
+                var total_credito = 0;
+                var output = '<table><tr><th>Código</th><th>Nombre</th><th>Naturaleza</th><th>Saldo Final</th></tr>';
+                for (var i = 0; i < cuentas.length; i++) {
+                    var codigo = cuentas[i][0];
+                    var nombre = cuentas[i][1];
+                    var naturaleza = cuentas[i][2];
+                    var saldo_inicial = cuentas[i][3];
+                    var movimientos = cuentas[i][4];
+                    var saldo_final = actualizar_saldo(saldo_inicial, movimientos);
+                    output += '<tr><td>' + codigo + '</td><td>' + nombre + '</td><td>' + naturaleza + '</td><td>$' + saldo_final.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</td></tr>';
+                    if (naturaleza === 'D') {
+                    total_debito += saldo_final;
+                    } else if (naturaleza === 'H') {
+                    total_credito += saldo_final;
+                    }
+                }
+                output += '<tr><td>Total Débito:</td><td></td><td></td><td>$' + total_debito.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</td></tr>';
+                output += '<tr><td>Total Crédito:</td><td></td><td></td><td>$' + total_credito.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</td></tr>';
+                output += '</table>';
+                document.getElementById('tabla-cuentas').innerHTML = output;
+            }
+            function validar_naturaleza(naturaleza) {
+                return naturaleza.toUpperCase() === 'D' || naturaleza.toUpperCase() === 'H';
+                }
+                function validar_movimiento(movimiento) {
+                try {
+                    var fecha = movimiento[0];
+                    var tipo = movimiento[1];
+                    var valor = movimiento[2];
+                    return typeof fecha === 'string' && typeof tipo === 'string' && (typeof valor === 'number' || valor instanceof Number);
+                } catch (err) {
+                    return false;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <!-- INICIO DEL NAV -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary" id="navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/HTML/index.html#encabezado">WEB GENIUS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item"><a href="#encabezado" class="nav-link" id="navilin"
+                                data-link="inicio">Inicio</a></li>
+                        <li class="nav-item"><a href="#acerca" class="nav-link" id="navilin"
+                                data-link="acerca-de-nosotros">Acerca de nosotros</a></li>
+                        <li class="nav-item"><a href="#ejercicios-python" class="nav-link" id="navilin"
+                                data-link="ejercicios-python">Ejercicios Python</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- FIN DEL NAV -->
+        <!-- INICIO ANIMACION -->
+        <div class="elemento-fondo">
+            <div class="animation">
+                <canvas id="locoalien"></canvas>
+                <script type="text/javascript" src="script.js"></script>
+            </div>
+        </div>
+        <!-- FIN ANIMACION -->
+        <div class="elemento-fondo" id="encabezado">
+            <canvas class="animation"></canvas>
+            <header class="hero">
+                <div class="hero-content">
+                    <h1>Ejercicios de Python pasados a JavaScript</h1>
+                    <p>Los ejercicios planteados, fueron diseñados para ser resueltos en la sintaxis de Python, pero ahora
+                        van a ser trasladados a JavaScript, siendo el mismo funcionamiento de estos mismos, pero con un
+                        ligero cambio. Con la explicación de estos, ya no serán tan complicados de entender.</p>
+                    <button class="my-button1"></button>
+                </div>
+            </header>
+        </div>
+        <main>
+            <div class="about">
+                <section class="container about">
+                    <h2 class="subtitle">¿Qué herramientas usamos para crear esta página?</h2>
+                    <p class="about__paragraph">Todo lo que usamos fueron 3 programas para completar la página y con ellos
+                        realizamos los ejercicios en la misma, los cuales son:</p>
+
+                    <div class="about__main">
+                        <article class="about__icons">
+                            <img src="assets/icon/html.svg" class="about__icon" alt="">
+                            <h3 class="about__title">HTML</h3>
+                            <p class="about__paragraph">(HyperText Markup Language) es un lenguaje de marcado utilizado para crear y estructurar contenido en la web, como texto, imágenes, videos y enlaces, utilizando etiquetas predefinidas para definir su apariencia y función.</p>
+                        </article>
+
+                        <article class="about__icons">
+                            <img src="assets/icon/css.svg" class="about__icon" alt="">
+                            <h3 class="about__title">CSS</h3>
+                            <p class="about__paragraph">(Cascading Style Sheets) es un lenguaje de diseño utilizado para dar estilo y formato a documentos HTML, permitiendo crear diseños atractivos y visualmente agradables.</p>
+                        </article>
+
+                        <article class="about__icons">
+                            <img src="assets/icon/javascript.svg" class="about__icon" alt="">
+                            <h3 class="about__title">JavaScript</h3>
+                            <p class="about__paragraph">JavaScript es un lenguaje de programación utilizado para crear interacciones dinámicas en páginas web, permitiendo a los desarrolladores crear efectos visuales y animaciones, validar formularios, entre otras funcionalidades.</p>
+                        </article>
+                    </div>
+                </section>
+            </div>
+            <div class="knowledge">
+                <div class="knowledge__container container">
+                    <figure class="knowledge__picture">
+                        <img src="assets/img/knowledge.jpg" class="knowledge__img" alt="">
+                        <div class="knowledge__overlay"></div>
+                    </figure>
+                    <div class="knowledge__texts">
+                        <h2 class="subtitle">Cómo hicimos el esquema, las animaciones y los colores de la página</h2>
+                        <p class="knowledge__paragraph">Esta pagina la hicimos por medio de programas como HTML,CSS y JavaScript, agregando tambien un ligero complemento con el Framework Boostrap, nos enfocamos en utilizar diferentes span y div, para guardar en un cuadro cada elemento que apareciera en la pagina, tambien nos guiamos de otras paginas y videos para llegar al 
+                            resultado final, para los ejercicios usamos algunos ya hechos en Python pero los cambiamos para que se adaptaran a la sintaxis de Javascrip.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- INICIO DE LAS CARDS -->
+            <section id="ejercicios-python" class="container">
+                <div class="content container-responsive">
+                    <div class="row card-container">
+                        <!-- INICIO DE LA CARD 1 -->
+                        <div class="col-sm-4">
+                            <div class="card-body">
+                                <label class="accordion accordion--1" for="open-1">
+                                    <input class="accordion__open" id="open-1" type="radio" name="acoordion-1">
+                                    <input class="accordion__close" id="close-1" type="radio" name="acoordion-1">
+                                    <div class="accordion__tab">CARD</div>
+                                    <div class="accordion__wrapper">
+                                        <dl class="accordion__box">
+                                            <dt class="accordion__patition">
+                                                <span class="accordion__number">01</span>
+                                                <span class="accordion__title">Codificación</span>
+                                            </dt>
+                                            <dd class="accordion__text">
+                                                <!--INICIO DEL TEXO AQUÍ-->
+                                                <div class="card-body">
+                                                    <img src="assets/img/codificacion.png" class="hidden" id="myImg1">
+                                                    <p class="card-text">Cifrado de un texto contenido en el archivo mediante la conversión de cada uno de sus caracteres al lenguaje MARTE I, el cúal se describe a continuación:</p>
+                                                    <table>
+                                                        <tr>
+                                                        <th>Carácter</th>
+                                                        <th>Equivalente<br />
+                                                            (6 caracteres sin
+                                                            espacios)</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>A</td>
+                                                            <td>..-...</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>B</td>
+                                                            <td>-.....</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>C</td>
+                                                            <td>.-.-..</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>D</td>
+                                                            <td>..-...</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>E</td>
+                                                            <td>...-..</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>F</td>
+                                                            <td>-...-.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>G</td>
+                                                            <td>..-.--</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>H</td>
+                                                            <td>.--...</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>I</td>
+                                                            <td>--..-.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>J</td>
+                                                            <td>...--.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>K</td>
+                                                            <td>.---..</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>L</td>
+                                                            <td>--....</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>M</td>
+                                                            <td>.---..</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>N</td>
+                                                            <td>---...</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>O</td>
+                                                            <td>--..-.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>P</td>
+                                                            <td>-..--.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Q</td>
+                                                            <td>....-.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>R</td>
+                                                            <td>..-...</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>S</td>
+                                                            <td>-....-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>T</td>
+                                                            <td>.-.-.-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>U</td>
+                                                            <td>..-..-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>V</td>
+                                                            <td>...-.-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>W</td>
+                                                            <td>-...--</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>X</td>
+                                                            <td>..-.--</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Y</td>
+                                                            <td>.--..-</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Z</td>
+                                                            <td>--..--</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Espacio</td>
+                                                            <td>------</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="card-tools">
+                                                        <button id="boton1" class="my-button responsive">Botón de Acción</button>
+                                                    </div>
+                                                </div>
+                                                <!--FIN DEL TEXTO AQUÍ-->
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <label for="close-1" class="accordion__button">
+                                        <span class="accordion__buttonText">CLOSE</span>
+                                    </label>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- FIN DE LA CARD 1 -->
+                        <!-- INICIO DE LA CARD 2 -->
+                        <div class="col-sm-4">
+                            <div class="card-body">
+                                <label class="accordion accordion--2" for="open-2">
+                                    <input class="accordion__open" id="open-2" type="radio" name="acoordion-2">
+                                    <input class="accordion__close" id="close-2" type="radio" name="acoordion-2">
+                                    <div class="accordion__tab">CARD</div>
+                                    <div class="accordion__wrapper">
+                                        <dl class="accordion__box">
+                                            <dt class="accordion__patition">
+                                                <span class="accordion__number">02</span>
+                                                <span class="accordion__title">Micromercado ACME</span>
+                                            </dt>
+                                            <dd class="accordion__text">
+                                                <!--INICIO DEL TEXO AQUÍ-->
+                                                <div class="card-body">
+                                                    <img src="assets/img/MICROMERCADO.png" alt="" class="hidden" id="myImg2">
+                                                    <p class="card-text">De cada cliente se solicitan los siguientes datos:</p>
+                                                    <ul>
+                                                        <li>Cédula del cliente</li>
+                                                        <li>Nombre del cliente</li>
+                                                        <li>Sexo del cliente:</li>
+                                                        <p id="texto" class="hidden"><span id="femenino">Femenino</span> <span
+                                                                id="masculino">Másculino</span></p>
+                                                    </ul>
+                                                    <p class="card-text">Cada uno de los clientes realizan entre 1 a M compras
+                                                        de productos. La información que se procesa por cada cliente es la
+                                                        siguiente:<br><br></p>
+                                                    <ul>
+                                                        <li>M, como la cantidad de productos a procesar</li>
+                                                        <li>Para cada producto, ingresar:</li>
+                                                        <ul>
+                                                            <li>Código del producto.</li>
+                                                            <li>Valor unitario del producto.</li>
+                                                            <li>Cantidad comprada</li>
+                                                            <li>Tipo de IVA, que puede ser:</li>
+                                                            <ul>
+                                                                <li>Exento de IVA</li>
+                                                                <li>Bienes, donde se aplica como IVA el 5%.</li>
+                                                                <li>General, donde se aplica como IVA el 19%.</li>
+                                                            </ul>
+                                                        </ul>
+                                                    </ul>
+                                                    <p class="card-text">
+                                                        El gerente de una tienda necesita un programa que calcule el valor de
+                                                        cada producto, que es el resultado de multiplicar la cantidad comprada
+                                                        por el precio unitario, sumarle el valor del impuesto de ventas y
+                                                        obtener el precio final.<br>También se requiere que se calcule el valor
+                                                        total de la compra, que es la suma de los precios finales de cada
+                                                        producto, y el valor total del impuesto de ventas de la compra.<br><br>
+
+                                                        Los valores calculados para cada producto (precio del producto, impuesto
+                                                        de ventas y precio final) se deben almacenar en listas.<br>
+
+                                                        Al final del día, el gerente desea recibir un informe que incluya la
+                                                        cantidad total de clientes, el número de clientes hombres y mujeres, el
+                                                        valor total de todas las ventas, el valor total del impuesto de ventas y
+                                                        el valor total de las ventas sin impuesto.
+                                                    </p>
+                                                    <p class="card-text"><br>Recomendaciones:</p>
+                                                    <ul>
+                                                        <li>La cantidad de clientes N como dato entero.</li>
+                                                        <li>Para los productos, se debe ingresar la cantidad de
+                                                            productos,seguido de cada producto en orden: código del artículo,
+                                                            valor unitario, cantidad comprada como dato entero y el tipo de IVA
+                                                            a aplicar al producto</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="card-tools">
+                                                        <button id="boton2" class="my-button responsive">Botón de
+                                                            Acción</button>
+                                                    </div>
+                                                </div>
+                                                <!--FIN DEL TEXTO AQUÍ-->
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <label for="close-2" class="accordion__button">
+                                        <span class="accordion__buttonText">CLOSE</span>
+                                    </label>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- FIN DE LA CARD 2-->
+                        <!-- INICIO DE LA CARD 3-->
+                        <div class="col-sm-4">
+                            <div class="card-body">
+                                <label class="accordion accordion--3" for="open-3">
+                                    <input class="accordion__open" id="open-3" type="radio" name="acoordion-3">
+                                    <input class="accordion__close" id="close-3" type="radio" name="acoordion-3">
+                                    <div class="accordion__tab">CARD</div>
+                                    <div class="accordion__wrapper">
+                                        <dl class="accordion__box">
+                                            <dt class="accordion__patition">
+                                                <span class="accordion__number">03</span>
+                                                <span class="accordion__title">Liquidacion de agua</span>
+                                            </dt>
+                                            <dd class="accordion__text">
+                                                <!--INICIO DEL TEXO AQUÍ-->
+                                                <div class="card-body">
+                                                    <img src="assets/img/servicioAgua.png" alt="" class="hidden" id="myImg3">
+                                                    <p class="card-text">Dada la información sobre un usuario del servicio de agua:</p>
+                                                    <ul>
+                                                        <li>Nombre</li>
+                                                        <li>Estrato(1,2,3,4,5)</li>
+                                                        <li>Consumo del mes (cm3)</li>
+                                                    </ul>
+                                                    <p class="card-text">Se pide calcular el valor a pagar por servicio de agua, conociendo que el servicio es la tarifa básica depende del estrato, así:<br><br></p>
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                            <th>Estrato</th>
+                                                            <th colspan="2">Tarifa Básica</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                            <td>1</td>
+                                                            <td>$</td>
+                                                            <td>10000</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td>2</td>
+                                                            <td>$</td>
+                                                            <td>15000</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td>3</td>
+                                                            <td>$</td>
+                                                            <td>30000</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td>4</td>
+                                                            <td>$</td>
+                                                            <td>60000</td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td>5</td>
+                                                            <td>$</td>
+                                                            <td>80000</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="card-tools">
+                                                        <button id="boton3" class="my-button responsive">Botón de
+                                                            Acción</button>
+                                                    </div>
+                                                </div>
+                                                <!--FIN DEL TEXTO AQUÍ-->
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                    <label for="close-3" class="accordion__button">
+                                        <span class="accordion__buttonText">CLOSE</span>
+                                    </label>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- FIN DE LAS CARTAS-->
+            <section class="testimony" id="acerca">
+                <div class="testimony__container container">
+                    <img src="assets/icon/leftarrow.svg" class="testimony__arrow" id="before">
+                    <section class="testimony__body testimony__body--show" data-id="1">
+                        <div class="testomony__texts">
+                            <h2 class="subtitle">Mi nombre es Braian Quintian <span class="testimony__course">estudiante del
+                                    Campus.</span></h2>
+                            <p class="testimony__review">
+                                ¡Hola! Soy estudiante de ingeniería de sistemas. Me apasiona la tecnología y el desarrollo de software. Me considero una persona proactiva, responsable y comprometida con mis objetivos. Me gusta trabajar en equipo y enfrentar nuevos desafíos para seguir aprendiendo y creciendo profesionalmente.</p>
+                        </div>
+
+                        <figure class="testimony__picture">
+                            <img src="assets/img/braian.png" class="testimony__img">
+                        </figure>
+                    </section>
+
+                    <section class="testimony__body" data-id="2">
+                        <div class="testomony__texts">
+                            <h2 class="subtitle">Mi nombre es Mariana Ruales <span class="testimony__course">estudiante del
+                                    Campus.</span></h2>
+                            <p class="testimony__review">Hola soy una chica de 17 años y estudiante del campus, me gusta la robotica y la informatica, estoy aprendiendo a buen ritmo, y desarrollandome en el ambito de la programacion con cada dia que pasa.Me considero una persona analitica y un tanto persistente, me gusta trabajar con mis compañeros y aprender de ellos.</p>
+                        </div>
+
+                        <figure class="testimony__picture">
+                            <img src="assets/img/mariana.png" class="testimony__img">
+                        </figure>
+                    </section>
+                    <img src="assets/icon/right.svg" class="testimony__arrow" id="next">
+                </div>
+            </section>
+            <div class="footer">
+                <footer class="footer">
+                    <div class="container">
+                        <div class="footer__row">
+                            <div class="footer__col footer__col--1">
+                            <h2 class="footer__title">WEB GENIUS</h2>
+                            <nav class="footer__nav">
+                                <ul class="footer__nav-list">
+                                <li class="footer__nav-item"><a href="#" class="footer__nav-link">Inicio</a></li>
+                                <li class="footer__nav-item"><a href="#" class="footer__nav-link">Acerca de nosotros</a></li>
+                                <li class="footer__nav-item"><a href="#" class="footer__nav-link">Ejercicios de pyton</a></li>
+                                </ul>
+                            </nav>
+                            </div>
+                            <div class="footer__col footer__col--2">
+                            <h2 class="footer__title">Regístrate</h2>
+                            <form class="footer__form">
+                                <input type="email" placeholder="Tu correo electrónico" class="footer__input">
+                                <button type="submit" class="footer__button">Suscribirme</button>
+                            </form>
+                            </div>
+                            <div class="footer__col footer__col--3">
+                                <h2 class="footer__title">Síguenos</h2>
+                                <div class="footer__social">
+                                    <a href="#" class="footer__social-link"><i class="fab fa-facebook"></i></a>
+                                    <a href="#" class="footer__social-link"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="footer__social-link"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__copy">
+                            <p>Derechos reservados &copy; Braian Quintian y Mariana Ruales</p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+        <script src="assets/js/script.js"></script>
+        <script src="assets/js/projects.js"></script>
+        <script src="assets/js/animation.js"></script>
+        <script src="assets/js/slider.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    </body>
+</html>

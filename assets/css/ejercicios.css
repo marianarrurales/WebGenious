@@ -1,0 +1,170 @@
+*{
+    margin:0;
+    padding: 0;
+}
+#contenedor{
+    width: auto;
+    height: 800px;
+    margin: 0.05em auto;
+    padding: 5%;
+}
+#header{
+    height: 15%;
+    background-color: rgba(13, 186, 238, 0.76);
+    margin: 1em;
+    border-radius: 1em;
+}
+#contenido{
+    height: 56%;
+    margin: 1em;
+}
+#footer{
+    height: 10%;
+    margin: 1em;
+    background-color: rgba(13, 186, 238, 0.76);
+    border-radius: 1em;
+}
+#section{
+    
+    height: 100%;
+    width: 50%;
+    background-color: rgba(13, 186, 238, 0.76);
+    margin-left: 0.5em;
+    border-radius: 1em;
+    float: left;
+}
+#aside{
+    
+    height: 100%;
+    width: 47%;
+    background-color:darksalmon ;
+    margin-right: 0.5em;
+    border-radius: 1em;
+    float:right;
+}
+.articulo{
+    padding: 0%;
+    height: 21%;
+    width: justify;
+    background-color: crimson;
+    border-radius: 1em;
+    margin: 2%;
+}
+h1{
+    color: gold;
+}
+/*--------NAVEGADOR--------*/
+
+#navbar {
+    --padding-container: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    padding: 20px;
+    background-color: transparent;
+    transition: all 0.35s ease-in-out;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.0em 0.0em 0.8em 0.8em;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+  
+#navbar a {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+  
+#navbar ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+}
+  
+#navbar li {
+    margin: 5px;
+}
+  
+#navbar .navbar-brand {
+    margin-right: auto;
+    height: auto;
+}
+  
+#navbar .nav {
+    margin-left: auto;
+}
+  
+.nav-link {
+    border-radius: 30px;
+    padding: 10px 20px;
+    transition: all 0.35s ease-in-out;
+}
+  
+.nav-link:hover {
+    border: 1px solid #2d2d2d;
+    background-color: #2d2d2d;
+}
+  
+.nav-link.w--current {
+    border: 1px solid #545454;
+    border-radius: 30px;
+    color: #fff;
+    background-color: #1d1d1d;
+}
+  
+a:active,
+a:hover {
+    outline: 0;
+    transition: none !important;
+}
+  
+#navbar.white {
+    background-color: rgb(248, 249, 250);
+}
+  
+#navbar.white a {
+    color: #000;
+}
+  
+#navbar.white a:hover {
+    color: #fff;
+}
+  
+#navbar.white .w--current {
+    color: #fff !important;
+}
+  
+#navbar.white a.navbar-brand:hover {
+    color: #000;
+}
+  
+@media (max-width: 768px) {
+    #navbar {
+        position: fixed;
+        height: auto;
+        padding: 10px;
+    }
+  
+    #navbar ul {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+    }
+  
+    #navbar .navbar-brand,
+    #navbar .nav {
+        margin: 0;
+    }
+  
+    #navbar li {
+        margin: 5px 0;
+    }
+}
+/* FIN DEL NAVBAR */
